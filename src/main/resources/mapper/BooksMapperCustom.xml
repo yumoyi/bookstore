@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookstore.demo.categorys.BooksMapperCustom">
+    <resultMap id="BaseResultMap" type="com.bookstore.demo.po.Books" >
+        <id column="book_id" property="bookId" jdbcType="INTEGER" />
+        <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+        <result column="book_price" property="bookPrice" jdbcType="DOUBLE" />
+        <result column="book_image" property="bookImage" jdbcType="VARCHAR" />
+        <result column="book_desc" property="bookDesc" jdbcType="VARCHAR" />
+        <result column="book_flag" property="bookFlag" jdbcType="INTEGER" />
+        <result column="book_num" property="bookNum" jdbcType="INTEGER" />
+        <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    </resultMap>
+    <select id="findAllByBooks" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.Books">
+        select *from books
+        <where>
+            <if test="categoryId !=null">
+                and category_id=#{categoryId,jdbcType=INTEGER}
+            </if>
+            <if test="bookName !=null">
+                and book_name like concat('%',#{bookName},'%')
+            </if>
+            <if test="bookFlag!=null">
+                and book_flag=#{bookFlag,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by book_name asc
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from books
+    </select>
+    <select id="findByBooks" resultMap="BaseResultMap">
+        select * from books
+        <where>
+            <if test="bookName !=null">
+                and book_name=#{bookName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

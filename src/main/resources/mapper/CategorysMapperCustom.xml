@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookstore.demo.categorys.CategorysMapperCustom">
+    <resultMap id="BaseResultMap" type="com.bookstore.demo.po.Categorys" >
+        <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="findAllByName" parameterType="com.bookstore.demo.po.Categorys" resultMap="BaseResultMap">
+        select *from categorys
+        <where>
+            <if test="categoryName !=null">
+                and category_name like concat('%',#{categoryName},'%')
+            </if>
+        </where>
+        order by category_name asc
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from categorys
+    </select>
+    <select id="findByCategorys" parameterType="com.bookstore.demo.po.Categorys" resultMap="BaseResultMap">
+        select * from categorys
+        <where>
+            <if test="categoryName!=null">
+                and category_name=#{categoryName,jdbcType=VARCHAR}
+            </if>
+            <if test="categoryId!=null">
+                and category_id=#{categoryId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+</mapper>
