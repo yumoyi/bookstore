@@ -1,7 +1,7 @@
 package com.bookstore.demo.service.serviceimpl;
 
-import com.bookstore.demo.categorys.CategorysMapper;
-import com.bookstore.demo.categorys.CategorysMapperCustom;
+import com.bookstore.demo.mapper.CategorysMapper;
+import com.bookstore.demo.mapper.CategorysMapperCustom;
 import com.bookstore.demo.po.Categorys;
 import com.bookstore.demo.service.CategorysService;
 import com.github.pagehelper.PageHelper;
@@ -37,7 +37,7 @@ public class CategorysServiceImpl implements CategorysService {
 
         PageHelper.startPage(page,size);
         List<Categorys> allByName = categorysMapperCustom.findAllByName(categorys);
-        PageInfo<Categorys> pageInfo = new PageInfo<Categorys>(allByName);
+        PageInfo<Categorys> pageInfo = new PageInfo<>(allByName);
         return pageInfo;
     }
 

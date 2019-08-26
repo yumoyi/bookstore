@@ -1,4 +1,4 @@
-package com.bookstore.demo.categorys;
+package com.bookstore.demo.mapper;
 
 import com.bookstore.demo.po.Address;
 import com.bookstore.demo.po.AddressExample;

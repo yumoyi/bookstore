@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bookstore.demo.categorys.OrdersMapperCustom">
+<mapper namespace="com.bookstore.demo.mapper.OrdersMapperCustom">
+
+    <resultMap id="BaseResultMap" type="com.bookstore.demo.po.Orders" >
+        <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+        <result column="order_total" property="orderTotal" jdbcType="DOUBLE" />
+        <result column="order_state" property="orderState" jdbcType="INTEGER" />
+        <result column="address_id" property="addressId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="findAllByOrders" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.Orders">
+        select *from orders
+        <where>
+            <if test="orderId !=null">
+                and order_id like concat('%',#{orderId},'%')
+            </if>
+            <if test="orderState !=null">
+                and order_state=#{orderState,jdbcType=INTEGER}
+            </if>
+            <if test="addressId !=null">
+                and address_id=#{addressId,jdbcType=INTEGER}
+            </if>
+            <if test="userId !=null">
+                and user_id=#{userId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by order_time asc
+    </select>
 </mapper>

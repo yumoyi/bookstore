@@ -1,7 +1,6 @@
-package com.bookstore.demo.categorys;
+package com.bookstore.demo.mapper;
 
 import com.bookstore.demo.po.Books;
-import com.bookstore.demo.po.Categorys;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,8 +26,7 @@ public interface BooksMapperCustom {
     List<Books> findAll();
 
     /**
-     * 后台添加时
-     * 根据书籍信息查询书籍是否存在
+     * 后台添加时根据书籍信息查询书籍是否存在
      * @param books
      * @return Books
      */

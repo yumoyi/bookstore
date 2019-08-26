@@ -1,4 +1,4 @@
-package com.bookstore.demo.controlller;
+package com.bookstore.demo.controller;
 
 import com.bookstore.demo.po.Users;
 import com.bookstore.demo.service.UserService;

@@ -1,11 +1,10 @@
 package com.bookstore.demo.service.serviceimpl;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.bookstore.demo.categorys.UsersMapper;
-import com.bookstore.demo.categorys.UsersMapperCustom;
+import com.bookstore.demo.mapper.UsersMapper;
+import com.bookstore.demo.mapper.UsersMapperCustom;
 import com.bookstore.demo.po.Users;
 import com.bookstore.demo.service.UserService;
-import com.bookstore.demo.utils.SendUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

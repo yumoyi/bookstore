@@ -1,7 +1,7 @@
 package com.bookstore.demo.service.serviceimpl;
 
-import com.bookstore.demo.categorys.BooksMapper;
-import com.bookstore.demo.categorys.BooksMapperCustom;
+import com.bookstore.demo.mapper.BooksMapper;
+import com.bookstore.demo.mapper.BooksMapperCustom;
 import com.bookstore.demo.po.Books;
 import com.bookstore.demo.service.BooksService;
 import com.github.pagehelper.PageHelper;
@@ -36,7 +36,7 @@ public class BooksServiceImpl implements BooksService {
     public PageInfo<Books> findAllByPage(Books books, int page, int size) {
         PageHelper.startPage(page,size);
         List<Books> allByBooks = booksMapperCustom.findAllByBooks(books);
-        PageInfo<Books> pageInfo = new PageInfo<Books>(allByBooks);
+        PageInfo<Books> pageInfo = new PageInfo<>(allByBooks);
         return pageInfo;
     }
 
@@ -50,6 +50,39 @@ public class BooksServiceImpl implements BooksService {
     public List<Books> finaAll(Books books) {
         List<Books> allByBooks = booksMapperCustom.findAllByBooks(books);
         return allByBooks;
+    }
+
+    /**
+     * 后台书籍状态改变
+     *
+     * @param books
+     * @return integer
+     */
+    @Override
+    public Integer bookUpdate(Books books) {
+        return booksMapper.updateByPrimaryKeySelective(books);
+    }
+
+    /**
+     * 后台书籍添加
+     *
+     * @param books
+     * @return
+     */
+    @Override
+    public Integer add(Books books) {
+        return booksMapper.insertSelective(books);
+    }
+
+    /**
+     * 后台书籍<单个>详情信息查询
+     *
+     * @param bookId
+     * @return book
+     */
+    @Override
+    public Books find(Integer bookId) {
+        return booksMapper.selectByPrimaryKey(bookId);
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bookstore.demo.categorys.OrderdetailMapper" >
+<mapper namespace="com.bookstore.demo.mapper.OrderdetailMapper" >
   <resultMap id="BaseResultMap" type="com.bookstore.demo.po.Orderdetail" >
     <id column="orderdetail_id" property="orderdetailId" jdbcType="INTEGER" />
     <result column="book_id" property="bookId" jdbcType="INTEGER" />

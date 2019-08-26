@@ -25,4 +25,25 @@ public interface BooksService {
      * @return
      */
     List<Books> finaAll(Books books);
+
+    /**
+     * 后台书籍状态改变
+     * @param books
+     * @return integer
+     */
+    Integer bookUpdate(Books books);
+
+    /**
+     * 后台书籍添加
+     * @param books
+     * @return
+     */
+    Integer add(Books books);
+
+    /**
+     * 后台书籍<单个>详情信息查询
+     * @param bookId
+     * @return book
+     */
+    Books find(Integer bookId);
 }
