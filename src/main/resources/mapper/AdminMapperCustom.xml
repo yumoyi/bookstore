@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bookstore.demo.mapper.AdminMapperCustom">
+    <resultMap id="BaseResultMap" type="com.bookstore.demo.po.Admin" >
+        <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+        <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+        <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="login" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.Admin">
+        select * from admin
+        where admin_name =#{adminName} and admin_password =#{adminPassword}
+    </select>
 </mapper>

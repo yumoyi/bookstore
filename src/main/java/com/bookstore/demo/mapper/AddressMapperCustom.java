@@ -1,6 +1,9 @@
 package com.bookstore.demo.mapper;
 
+import com.bookstore.demo.po.Address;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author cy
@@ -8,4 +11,11 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AddressMapperCustom {
+
+    /**
+     * 查询收货人
+     * @param userId
+     * @return list
+     */
+    List<Address> userAddress(Integer userId);
 }

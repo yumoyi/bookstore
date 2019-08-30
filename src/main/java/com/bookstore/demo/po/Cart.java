@@ -6,11 +6,11 @@ import lombok.Data;
  * @author cy
  */
 @Data
-public class Car {
+public class Cart {
     /**
      * 购物车id
      */
-    private Integer carId;
+    private Integer cartId;
 
     /**
      * 购物车中书籍id
@@ -25,7 +25,7 @@ public class Car {
     /**
      * 购物车中每种书价格小计
      */
-    private Double carTotal;
+    private Double cartTotal;
 
     /**
      * 购物车属于某个用户id

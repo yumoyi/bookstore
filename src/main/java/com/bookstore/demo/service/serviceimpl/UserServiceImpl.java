@@ -1,12 +1,19 @@
 package com.bookstore.demo.service.serviceimpl;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.bookstore.demo.mapper.AddressMapper;
+import com.bookstore.demo.mapper.AddressMapperCustom;
 import com.bookstore.demo.mapper.UsersMapper;
 import com.bookstore.demo.mapper.UsersMapperCustom;
+import com.bookstore.demo.po.Address;
+import com.bookstore.demo.po.BooksExample;
 import com.bookstore.demo.po.Users;
+import com.bookstore.demo.po.UsersExample;
 import com.bookstore.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author cy
@@ -21,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UsersMapper usersMapper;
+
+    @Autowired
+    private AddressMapperCustom addressMapperCustom;
 
 
     /**
@@ -96,6 +106,27 @@ public class UserServiceImpl implements UserService {
         System.out.println("验证码:"+code);
         //SendUtils.sendSms(telephone,code);
         return code;
+    }
+
+    /**
+     * 收货人查询
+     * @param userId
+     * @return list
+     */
+    @Override
+    public List<Address> userAddress(Integer userId) {
+        return addressMapperCustom.userAddress(userId);
+    }
+
+    /**
+     * 统计有多少用户
+     *
+     * @param usersExample
+     * @return integer
+     */
+    @Override
+    public Integer countUsers(UsersExample usersExample) {
+        return usersMapper.countByExample(usersExample);
     }
 
 

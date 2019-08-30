@@ -1,5 +1,6 @@
 package com.bookstore.demo.mapper;
 
+import com.bookstore.demo.po.OrderPage;
 import com.bookstore.demo.po.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,4 +18,11 @@ public interface OrdersMapperCustom {
      * @return List<Orders>
      */
     List<Orders> findAllByOrders(Orders orders);
+
+    /**
+     * 查询订单(OrderPage)
+     * @param orders
+     * @return List<OrderPage>
+     */
+    List<OrderPage> findAllByOrders2(Orders orders);
 }

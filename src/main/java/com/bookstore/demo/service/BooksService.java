@@ -1,6 +1,8 @@
 package com.bookstore.demo.service;
 
 import com.bookstore.demo.po.Books;
+import com.bookstore.demo.po.BooksExample;
+import com.bookstore.demo.po.OrdersExample;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -46,4 +48,10 @@ public interface BooksService {
      * @return book
      */
     Books find(Integer bookId);
+    /**
+     * 统计有多少书籍
+     * @param booksExample
+     * @return integer
+     */
+    Integer countBooks(BooksExample booksExample);
 }

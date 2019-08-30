@@ -1,8 +1,13 @@
 package com.bookstore.demo.service;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.bookstore.demo.po.Address;
+import com.bookstore.demo.po.BooksExample;
 import com.bookstore.demo.po.Users;
+import com.bookstore.demo.po.UsersExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author cy
@@ -52,4 +57,18 @@ public interface UserService {
      * @return code
      */
     String createSmsCode(String telephone) throws ClientException;
+
+    /**
+     * 收货人查询
+     * @param userId
+     * @return list
+     */
+    List<Address> userAddress(Integer userId);
+
+    /**
+     * 统计有多少用户
+     * @param usersExample
+     * @return integer
+     */
+    Integer countUsers(UsersExample usersExample);
 }

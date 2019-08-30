@@ -12,8 +12,18 @@
     </select>
     <select id="selectByName" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.Users">
         select * from users where user_name=#{userName}
+
+
     </select>
     <select id="selectById" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.Users">
         select *from users where user_id=#{userId}
+    </select>
+    <select id="findAllByUsers" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.Users">
+        select * from users
+        <where>
+            <if test="userName !=null">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+        </where>
     </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.bookstore.demo.service.serviceimpl;
 import com.bookstore.demo.mapper.BooksMapper;
 import com.bookstore.demo.mapper.BooksMapperCustom;
 import com.bookstore.demo.po.Books;
+import com.bookstore.demo.po.BooksExample;
 import com.bookstore.demo.service.BooksService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -83,6 +84,17 @@ public class BooksServiceImpl implements BooksService {
     @Override
     public Books find(Integer bookId) {
         return booksMapper.selectByPrimaryKey(bookId);
+    }
+
+    /**
+     * 统计有多少书籍
+     *
+     * @param booksExample
+     * @return integer
+     */
+    @Override
+    public Integer countBooks(BooksExample booksExample) {
+        return booksMapper.countByExample(booksExample);
     }
 
 

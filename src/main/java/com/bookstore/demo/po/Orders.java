@@ -1,6 +1,7 @@
 package com.bookstore.demo.po;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 /**
@@ -16,6 +17,7 @@ public class Orders {
     /**
      * 订单生成时间
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
 
     /**
