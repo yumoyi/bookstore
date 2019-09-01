@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class IndexController {
 
+    /**
+     * 后台页面起始页
+     * @return 登录界面
+     */
     @RequestMapping("/index")
-    public String  index(){
-        //return "admin/main";
+    public String index(){
         return "admin/login";
     }
 

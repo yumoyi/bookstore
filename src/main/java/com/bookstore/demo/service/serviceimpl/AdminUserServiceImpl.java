@@ -26,7 +26,7 @@ public class AdminUserServiceImpl implements AdminUserService {
      * @param users
      * @param page
      * @param size
-     * @return users
+     * @return 带分页的用户信息
      */
     @Override
     public PageInfo<Users> findAllByPage(Users users, int page, int size) {

@@ -22,8 +22,14 @@ public class AddressController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 跳转到用户收货人详情页面
+     * @param model
+     * @param userId
+     * @return 收货人详情页面
+     */
     @RequestMapping("/userAddress")
-    public String userAddress(Model model,@RequestParam(value= "userId",required =false) Integer userId){
+    public String userAddress(Model model,Integer userId){
 
         List<Address> addresses = userService.userAddress(userId);
         model.addAttribute("addresses",addresses);

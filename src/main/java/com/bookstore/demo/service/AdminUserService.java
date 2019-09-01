@@ -10,11 +10,11 @@ import com.github.pagehelper.PageInfo;
 public interface AdminUserService {
 
     /**
-     *  用户信息查询
+     * 用户信息查询
      * @param users
      * @param page
      * @param size
-     * @return users
+     * @return 带分页的用户信息
      */
     PageInfo<Users> findAllByPage(Users users, int page, int size);
 }

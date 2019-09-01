@@ -13,7 +13,7 @@ public interface AdminMapperCustom {
     /**
      * 管理员登录
      * @param admin
-     * @return admin
+     * @return 管理员信息
      */
     Admin login(Admin admin);
 }

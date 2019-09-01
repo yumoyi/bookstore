@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,18 +18,17 @@ import javax.servlet.http.HttpSession;
  * @author cy
  * @since 2019-08-20 8:03
  */
-@Controller
+@RestController
 @RequestMapping("/user")
-@ResponseBody
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     /**
-     * 用户登录
+     * 前台用户登录
      * @param users
-     * @return users
+     * @return 用户信息
      */
     @RequestMapping("login")
     public Users login(Users users){
@@ -55,7 +55,16 @@ public class UserController {
             resp.getWriter().println(2);
         }
     }
-    //主界面注册按钮的跳转
+
+    /**
+     * 用户注册
+     * @param model
+     * @param user
+     * @param session
+     * @param telephone
+     * @param code
+     * @return 注册成功登录界面;失败提示页面
+     */
     @RequestMapping("/register")
     public String register(Model model, Users user, HttpSession session, String telephone, String code) {
 

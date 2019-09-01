@@ -295,8 +295,7 @@
                 language: 'zh-CN'
             });
         });
-		
-		//$("#saveform").serialize()
+
 		function save(){
 			var formData = new FormData();
 			var bookName = $("#bookName").val();
@@ -325,7 +324,7 @@
 				contentType : false, 
 				success:function(data){
 					 if(data.success){
-							location.href="${pageContext.request.contextPath }/admin/book";
+							location.href="${pageContext.request.contextPath }/admin/book?bookFlag="+bookFlag.toString();
 						 }else{
 							alert(data.message); 
 					 }

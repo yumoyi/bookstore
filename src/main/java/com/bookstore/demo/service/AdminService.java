@@ -10,7 +10,7 @@ public interface AdminService {
     /**
      * 管理员登陆
      * @param admin
-     * @return
+     * @return 管理员信息
      */
     Admin login(Admin admin);
 }

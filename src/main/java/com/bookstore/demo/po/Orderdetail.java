@@ -32,5 +32,18 @@ public class Orderdetail {
      */
     private String orderId;
 
+    /**
+     * 书籍名称
+     */
+    private String bookName;
 
+    /**
+     * 书籍价格
+     */
+    private Double bookPrice;
+
+    /**
+     * 书籍图片地址
+     */
+    private String bookImage;
 }

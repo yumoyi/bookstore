@@ -108,7 +108,7 @@
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
 							</div>
-							<a href="${pageContext.request.contextPath }/admin/book?page=1&size=5" class="small-box-footer">详细 <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="${pageContext.request.contextPath }/admin/book?bookFlag=1" class="small-box-footer">详细 <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 					<!-- ./col -->

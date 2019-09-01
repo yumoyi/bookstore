@@ -15,7 +15,7 @@ public interface AddressMapperCustom {
     /**
      * 查询收货人
      * @param userId
-     * @return list
+     * @return 收货人信息
      */
     List<Address> userAddress(Integer userId);
 }

@@ -37,7 +37,7 @@ public class OrdersServiceImpl implements OrdersService {
      * @param orders
      * @param page
      * @param size
-     * @return pageInfo<Orders>
+     * @return 带分页的订单信息
      */
     @Override
     public PageInfo<Orders> findAllByPage(Orders orders, int page, int size) {
@@ -47,13 +47,12 @@ public class OrdersServiceImpl implements OrdersService {
         PageInfo<Orders> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
-
     /**
      * 带分页的订单查询(OrderPage)
      * @param orders
      * @param page
      * @param size
-     * @return pageInfo<Orders>
+     * @return 订单信息
      */
     @Override
     public PageInfo<OrderPage> findAllByPage2(Orders orders, int page, int size) {
@@ -68,7 +67,7 @@ public class OrdersServiceImpl implements OrdersService {
      * 更新订单信息(订单状态)
      *
      * @param orders
-     * @return integer
+     * @return 判断是否修改成功
      */
     @Override
     public Integer orderUp(Orders orders) {
@@ -81,21 +80,21 @@ public class OrdersServiceImpl implements OrdersService {
      * @param orderdetail
      * @param page
      * @param size
-     * @return
+     * @return 订单详情信息
      */
     @Override
-    public PageInfo<OrderdetailPage> orderAll(Orderdetail orderdetail, int page, int size) {
+    public PageInfo<Orderdetail> orderAll(Orderdetail orderdetail, int page, int size) {
 
         PageHelper.startPage(page,size);
-        List<OrderdetailPage> orderdetailPages = orderdetailMapperCustom.orderAll(orderdetail);
-        PageInfo<OrderdetailPage> pageInfo = new PageInfo<>(orderdetailPages);
+        List<Orderdetail> orderDetails = orderdetailMapperCustom.orderAll(orderdetail);
+        PageInfo<Orderdetail> pageInfo = new PageInfo<>(orderDetails);
         return pageInfo;
     }
 
     /**
      * 统计有多少订单
      * @param ordersExample
-     * @return integer
+     * @return 订单总数
      */
     @Override
     public Integer countOrders(OrdersExample ordersExample) {

@@ -36,17 +36,15 @@ public class AdminUserController {
     private UserService userService;
     /**
      * 后台用户信息查询
-     * @param userName
+     * @param users
      * @param model
      * @param page
      * @param size
-     * @return
+     * @return 用户信息界面
      */
     @RequestMapping("/user")
-    public String adminUser(@RequestParam(value= "userName",required =false) String userName, Model model, @RequestParam(value="page",required=false,defaultValue="1")int page, @RequestParam(value="size",required=false,defaultValue="5")int size){
+    public String adminUser(Users users, Model model, @RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="5")int size){
 
-        Users users = new Users();
-        users.setUserName(userName);
         PageInfo<Users> pageInfo = adminUserService.findAllByPage(users,page,size);
 
         //判断搜索用户是否存在
@@ -56,7 +54,7 @@ public class AdminUserController {
             model.addAttribute("msg","没有搜索到用户,请重新搜索!");
         }
         //数据回显
-        model.addAttribute("userName",userName);
+        model.addAttribute("userName",users.getUserName());
 
         return "admin/user";
     }
@@ -65,7 +63,7 @@ public class AdminUserController {
     /**
      * 管理员登录
      * @param admin
-     * @return
+     * @return 重定向到后台主页面
      */
     @RequestMapping("login")
     public String login(Admin admin, Model model, HttpSession session){
@@ -83,7 +81,7 @@ public class AdminUserController {
     /**
      * 管理员退出登录
      * @param session
-     * @return
+     * @return 登录界面
      */
     @RequestMapping("/loginout")
     public String loginout(HttpSession session){
@@ -95,10 +93,10 @@ public class AdminUserController {
     /**
      * 主页面的跳转
      * @param model
-     * @return
+     * @return 后台主界面
      */
     @RequestMapping("/main")
-    public String main(Model model, OrdersExample ordersExample, BooksExample booksExample, UsersExample usersExample,@RequestParam(value="page",required=false,defaultValue="1")int page, @RequestParam(value="size",required=false,defaultValue="5")int size){
+    public String main(Model model, OrdersExample ordersExample, BooksExample booksExample, UsersExample usersExample,@RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="5")int size){
         Integer countOrders = ordersService.countOrders(ordersExample);
         model.addAttribute("countOrders",countOrders);
 

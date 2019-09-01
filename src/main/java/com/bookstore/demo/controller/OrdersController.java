@@ -4,6 +4,7 @@ import com.bookstore.demo.po.*;
 import com.bookstore.demo.service.OrdersService;
 import com.bookstore.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,19 +29,16 @@ public class OrdersController {
 
     /**
      *  后台页面带分页展示
-     * @param orderState
-     * @param orderId
+     * @param orders
      * @param model
      * @param page
      * @param size
      * @return
      */
     @RequestMapping("/order")
-    public String order(@RequestParam(value="orderState",required=false)Integer orderState, @RequestParam(value="orderId",required=false)String orderId,  Model model, @RequestParam(value="page",required=false,defaultValue="1")int page, @RequestParam(value="size",required=false,defaultValue="5")int size) {
-        Orders orders = new Orders();
-        orders.setOrderState(orderState);
-        orders.setOrderId(orderId);
+    public String order(Orders orders,Model model,@RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="5")int size) {
 
+        Integer orderState = orders.getOrderState();
         //返回的继承Orders类的OrderPage
         PageInfo<OrderPage> pageInfo = ordersService.findAllByPage2(orders, page, size);
 
@@ -72,18 +70,15 @@ public class OrdersController {
 
     /**
      * 更新订单的状态
-     * @param orderId
-     * @param orderState
+     * @param order
      * @param model
      * @param index 1:跳转全部订单  2:跳转已付款订单
      * @return
      */
     @RequestMapping("/orderUpdate")
-    public String orderUpdate(String orderId,Integer orderState,Model model,Integer index,@RequestParam(value = "userId",required=false) Integer userId){
-        Orders orders = new Orders();
-        orders.setOrderId(orderId);
-        orders.setOrderState(orderState);
-        Integer orderUp = ordersService.orderUp(orders);
+    public String orderUpdate(Orders order,Model model,Integer index){
+        Integer userId = order.getUserId();
+        Integer orderUp = ordersService.orderUp(order);
         if(orderUp==0){
             model.addAttribute("msg","更新订单状态失败!");
         }
@@ -99,19 +94,19 @@ public class OrdersController {
 
     /**
      * 查看订单详情
-     * @param orderState
+     * @param order
      * @param model
-     * @param orderId
      * @param page
      * @param size
      * @return
      */
     @RequestMapping("/orderAll")
-    public String orderAll(@RequestParam(value="orderState",required=false)Integer orderState,Model model,String orderId,@RequestParam(value="page",required=false,defaultValue="1")int page, @RequestParam(value="size",required=false,defaultValue="15")int size){
-
+    public String orderAll(Orders order,Model model,@RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="15")int size){
+        String orderId = order.getOrderId();
+        Integer orderState = order.getOrderState();
         Orderdetail orderdetail = new Orderdetail();
         orderdetail.setOrderId(orderId);
-        PageInfo<OrderdetailPage> pageInfo = ordersService.orderAll(orderdetail, page, size);
+        PageInfo<Orderdetail> pageInfo = ordersService.orderAll(orderdetail, page, size);
         if(pageInfo.getTotal()!=0) {
             model.addAttribute("pageinfo", pageInfo);
             model.addAttribute("orderId",orderId);
@@ -124,12 +119,11 @@ public class OrdersController {
 
 
     @RequestMapping("/userOrder")
-    public String userOrder(@RequestParam(value="userId",required=false)Integer userId,  Model model, @RequestParam(value="page",required=false,defaultValue="1")int page, @RequestParam(value="size",required=false,defaultValue="5")int size) {
-        Orders orders = new Orders();
-        orders.setUserId(userId);
+    public String userOrder(Orders order,Model model, @RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="5")int size) {
+        Integer userId = order.getUserId();
 
         //返回的继承Orders类的OrderPage
-        PageInfo<OrderPage> pageInfo = ordersService.findAllByPage2(orders, page, size);
+        PageInfo<OrderPage> pageInfo = ordersService.findAllByPage2(order, page, size);
 
         //判断搜索订单是否存在
         if(pageInfo.getTotal()!=0) {
@@ -143,11 +137,11 @@ public class OrdersController {
 
 
     @RequestMapping("/userOrderAll")
-    public String orderAll(Model model,Integer userId,String orderId,@RequestParam(value="page",required=false,defaultValue="1")int page, @RequestParam(value="size",required=false,defaultValue="15")int size){
+    public String orderAll(Model model,Integer userId,String orderId,@RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="15")int size){
 
         Orderdetail orderdetail = new Orderdetail();
         orderdetail.setOrderId(orderId);
-        PageInfo<OrderdetailPage> pageInfo = ordersService.orderAll(orderdetail, page, size);
+        PageInfo<Orderdetail> pageInfo = ordersService.orderAll(orderdetail, page, size);
         if(pageInfo.getTotal()!=0) {
             model.addAttribute("pageinfo", pageInfo);
             model.addAttribute("orderId",orderId);

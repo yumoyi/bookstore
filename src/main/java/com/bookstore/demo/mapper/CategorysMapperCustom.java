@@ -16,21 +16,21 @@ public interface CategorysMapperCustom {
     /**
      * 根据名称查分类(名称为空查所有分类)
      * @param categorys
-     * @return categorys
+     * @return 分类信息
      */
     List<Categorys> findAllByName(Categorys categorys);
 
 
     /**
      * 查询所有分类
-     * @return categorys
+     * @return 分类信息
      */
     List<Categorys> findAll();
 
     /**
      * 根据分类信息查询分类是否存在
      * @param categorys
-     * @return categorys
+     * @return 分类信息
      */
     Categorys findByCategorys(Categorys categorys);
 }

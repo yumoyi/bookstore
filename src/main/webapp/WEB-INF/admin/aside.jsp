@@ -55,13 +55,13 @@
 							<ul class="treeview-menu">
 
 								<li id="charts-chartjs">
-									<a href="${pageContext.request.contextPath }/admin/book?page=1&size=5">
+									<a href="${pageContext.request.contextPath }/admin/book?bookFlag=1">
 										<i class="fa fa-circle-o"></i> 在架书籍管理
 									</a>
 								</li>
 
 								<li id="charts-morris">
-									<a href="${pageContext.request.contextPath }/admin/book?page=1&size=5&bookFlag=2">
+									<a href="${pageContext.request.contextPath }/admin/book?bookFlag=2">
 										<i class="fa fa-circle-o"></i> 未上架书籍管理
 									</a>
 								</li>

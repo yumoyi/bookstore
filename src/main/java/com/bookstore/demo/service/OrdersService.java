@@ -1,6 +1,9 @@
 package com.bookstore.demo.service;
 
-import com.bookstore.demo.po.*;
+import com.bookstore.demo.po.OrderPage;
+import com.bookstore.demo.po.Orderdetail;
+import com.bookstore.demo.po.Orders;
+import com.bookstore.demo.po.OrdersExample;
 import com.github.pagehelper.PageInfo;
 
 /**
@@ -14,7 +17,7 @@ public interface OrdersService {
      * @param orders
      * @param page
      * @param size
-     * @return pageInfo<Orders>
+     * @return 带分页的订单信息
      */
     PageInfo<Orders> findAllByPage(Orders orders, int page, int size);
 
@@ -23,15 +26,14 @@ public interface OrdersService {
      * @param orders
      * @param page
      * @param size
-     * @return pageInfo<Orders>
+     * @return 订单信息
      */
     PageInfo<OrderPage> findAllByPage2(Orders orders, int page, int size);
-
 
     /**
      * 更新订单信息(订单状态)
      * @param orders
-     * @return integer
+     * @return 判断是否修改成功
      */
     Integer orderUp(Orders orders);
 
@@ -40,14 +42,14 @@ public interface OrdersService {
      * @param orderdetail
      * @param page
      * @param size
-     * @return
+     * @return 订单详情信息
      */
-    PageInfo<OrderdetailPage> orderAll(Orderdetail orderdetail,int page,int size);
+    PageInfo<Orderdetail> orderAll(Orderdetail orderdetail, int page, int size);
 
     /**
      * 统计有多少订单
      * @param ordersExample
-     * @return integer
+     * @return 订单总数
      */
     Integer countOrders(OrdersExample ordersExample);
 }

@@ -104,6 +104,10 @@
 
                         <c:if test="${empty pageinfo}">
                             <font color="red">${msg}</font>
+                            <div class="col-md-12 data text-center">
+                                <button type="button" class="btn"
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/user'">返回</button>
+                            </div>
                         </c:if>
 
 
@@ -135,7 +139,7 @@
                                     <td>
                                         <c:if test="${p.orderState==1}">未付款</c:if>
                                         <c:if test="${p.orderState==2}">
-                                            <a href="${pageContext.request.contextPath}/admin/orderUpdate?orderState=3&orderId=${p.orderId}&index=3&userId=${userId}">已付款</a>
+                                            <a href="${pageContext.request.contextPath}/admin/orderUpdate?orderState=3&orderId=${p.orderId}&index=3&userId=${userId}" onclick="return confirm('您确定要发货吗？');">已付款</a>
                                         </c:if>
                                         <c:if test="${p.orderState==3}">已发货</c:if>
                                         <c:if test="${p.orderState==4}">已完成</c:if>
@@ -155,8 +159,6 @@
                         <div class="col-md-12 data text-center">
                                 <button type="button" class="btn"
                                         onclick="location.href='${pageContext.request.contextPath}/admin/user'">返回</button>
-
-                            <%--<button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>--%>
                         </div>
 
                     </div>

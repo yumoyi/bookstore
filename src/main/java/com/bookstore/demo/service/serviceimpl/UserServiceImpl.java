@@ -10,10 +10,13 @@ import com.bookstore.demo.po.BooksExample;
 import com.bookstore.demo.po.Users;
 import com.bookstore.demo.po.UsersExample;
 import com.bookstore.demo.service.UserService;
+import com.bookstore.demo.utils.SendUtils;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author cy
@@ -37,7 +40,7 @@ public class UserServiceImpl implements UserService {
      * 用户登录
      *
      * @param users
-     * @return users
+     * @return 用户信息
      */
     @Override
     public Users login(Users users) {
@@ -48,7 +51,7 @@ public class UserServiceImpl implements UserService {
      * 用户注册
      *
      * @param users
-     * @return users
+     * @return 判断是否注册成功
      */
     @Override
     public Integer register(Users users) {
@@ -59,7 +62,7 @@ public class UserServiceImpl implements UserService {
      * 根据用户名查询用户信息
      *
      * @param users
-     * @return users
+     * @return 用户信息
      */
     @Override
     public Users selectByName(Users users) {
@@ -70,7 +73,7 @@ public class UserServiceImpl implements UserService {
      * 根据用户id查询用户信息
      *
      * @param users
-     * @return users
+     * @return 用户信息
      */
     @Override
     public Users selectById(Users users) {
@@ -81,7 +84,7 @@ public class UserServiceImpl implements UserService {
      * 修改用户信息
      *
      * @param users
-     * @return integer
+     * @return 判断是否修改成功
      */
     @Override
     public Integer update(Users users) {
@@ -92,18 +95,16 @@ public class UserServiceImpl implements UserService {
      * 生成手机验证码
      *
      * @param telephone
-     * @return code
+     * @return 验证码
      */
     @Override
     public String createSmsCode(String telephone) throws ClientException {
 
         //生成4位随机数
-        String code ="";
-        for(int i=1;i<=6;i++){
-            String code2 = (int)(Math.random()*10)+"";
-            code = code + code2;
-        }
+        int x = new Random().nextInt(9999)%(9999-1000+1)+ 1000;
+        String code = x +"";
         System.out.println("验证码:"+code);
+        //调用发送手机验证码接口
         //SendUtils.sendSms(telephone,code);
         return code;
     }
@@ -111,7 +112,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 收货人查询
      * @param userId
-     * @return list
+     * @return 收货人信息
      */
     @Override
     public List<Address> userAddress(Integer userId) {
@@ -122,7 +123,7 @@ public class UserServiceImpl implements UserService {
      * 统计有多少用户
      *
      * @param usersExample
-     * @return integer
+     * @return 用户总数
      */
     @Override
     public Integer countUsers(UsersExample usersExample) {

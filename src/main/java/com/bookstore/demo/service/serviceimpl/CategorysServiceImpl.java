@@ -30,7 +30,7 @@ public class CategorysServiceImpl implements CategorysService {
      * @param categorys
      * @param page
      * @param size
-     * @return
+     * @return 带分页的分类信息
      */
     @Override
     public PageInfo<Categorys> findAllByPage(Categorys categorys, int page, int size) {
@@ -45,7 +45,7 @@ public class CategorysServiceImpl implements CategorysService {
      * 根据id删除分类
      *
      * @param categoryId
-     * @return Integer
+     * @return 判断是否删除成功
      */
     @Override
     public Integer deleteById(Integer categoryId) {
@@ -56,7 +56,7 @@ public class CategorysServiceImpl implements CategorysService {
      * 添加分类
      *
      * @param categorys
-     * @return Integer
+     * @return 判断是否添加成功
      */
     @Override
     public Integer add(Categorys categorys) {
@@ -67,7 +67,7 @@ public class CategorysServiceImpl implements CategorysService {
      * 修改分类
      *
      * @param categorys
-     * @return Integer
+     * @return 判断是否修改成功
      */
     @Override
     public Integer update(Categorys categorys) {
@@ -76,7 +76,7 @@ public class CategorysServiceImpl implements CategorysService {
 
     /**
      * 不带分页的全部分类查询
-     * @return categorys
+     * @return 分类信息
      */
     @Override
     public List<Categorys> findAll() {
@@ -87,7 +87,7 @@ public class CategorysServiceImpl implements CategorysService {
      * 根据分类信息查询分类是否存在
      *
      * @param categorys
-     * @return categorys
+     * @return 分类信息
      */
     @Override
     public Categorys findByCategorys(Categorys categorys) {

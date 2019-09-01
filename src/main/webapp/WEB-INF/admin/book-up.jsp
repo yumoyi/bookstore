@@ -194,14 +194,14 @@
 
 					<div class="box-tools pull-right">
 						<ul class="pagination">
-							<li><a href="${pageContext.request.contextPath}/admin/book?page=1&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=1" aria-label="Previous">首页</a></li>
-							<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageinfo.pageNum-1}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=1">上一页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/book?page=1&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=2" aria-label="Previous">首页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageinfo.pageNum-1}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=2">上一页</a></li>
 							<c:forEach begin="1" end="${pageinfo.pages}" var="pageNum"> 
-								<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageNum}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=1">${pageNum}</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageNum}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=2">${pageNum}</a></li>
 							</c:forEach>
 						
-							<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageinfo.pageNum+1}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=1">下一页</a></li>
-							<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageinfo.pages}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=1" aria-label="Next">尾页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageinfo.pageNum+1}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=2">下一页</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/book?page=${pageinfo.pages}&size=${pageinfo.pageSize}&categoryId=${categoryId}&bookName=${bookName}&bookFlag=2" aria-label="Next">尾页</a></li>
 						</ul>
 					</div>
 
@@ -318,7 +318,7 @@
 			var pageSize = $("#changePageSize").val();
 
 			//向服务器发送请求，改变没页显示条数
-			location.href = "${pageContext.request.contextPath}/admin/book?bookFlag=1&categoryId=${categoryId}&bookName=${bookName}&page=1&size="
+			location.href = "${pageContext.request.contextPath}/admin/book?bookFlag=2&categoryId=${categoryId}&bookName=${bookName}&page=1&size="
 				+ pageSize;
 		}
 

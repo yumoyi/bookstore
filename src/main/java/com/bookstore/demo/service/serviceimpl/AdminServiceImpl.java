@@ -19,7 +19,7 @@ public class AdminServiceImpl implements AdminService {
      * 管理员登陆
      *
      * @param admin
-     * @return
+     * @return 管理员信息
      */
     @Override
     public Admin login(Admin admin) {

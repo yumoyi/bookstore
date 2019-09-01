@@ -15,14 +15,14 @@ public interface OrdersMapperCustom {
     /**
      * 查询订单
      * @param orders
-     * @return List<Orders>
+     * @return 订单信息
      */
     List<Orders> findAllByOrders(Orders orders);
 
     /**
      * 查询订单(OrderPage)
      * @param orders
-     * @return List<OrderPage>
+     * @return 订单信息
      */
     List<OrderPage> findAllByOrders2(Orders orders);
 }

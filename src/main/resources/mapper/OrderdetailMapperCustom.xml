@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bookstore.demo.mapper.OrderdetailMapperCustom" >
-  <resultMap id="BaseResultMap" type="com.bookstore.demo.po.OrderdetailPage" >
+  <resultMap id="BaseResultMap" type="com.bookstore.demo.po.Orderdetail" >
     <id column="orderdetail_id" property="orderdetailId" jdbcType="INTEGER" />
     <result column="book_id" property="bookId" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
@@ -11,15 +11,16 @@
     <result column="book_image" property="bookImage" jdbcType="VARCHAR" />
 
   </resultMap>
-  <select id="orderAll" parameterType="com.bookstore.demo.po.OrderdetailPage" resultMap="BaseResultMap">
+
+  <select id="orderAll" parameterType="com.bookstore.demo.po.Orderdetail" resultMap="BaseResultMap">
     select
     orderdetail_id,
     quantity,
     subtotal,
     b1.book_id book_id,
-    b1.book_name,
-    b1.book_price,
-    b1.book_image
+    c.book_name,
+    c.book_price,
+    c.book_image
 
     FROM orderdetail c LEFT JOIN books b1 on c.book_id = b1.book_id
 

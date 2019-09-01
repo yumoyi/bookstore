@@ -7,6 +7,9 @@
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
     <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="book_price" property="bookPrice" jdbcType="DOUBLE" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="book_image" property="bookImage" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    orderdetail_id, book_id, quantity, subtotal, order_id
+    orderdetail_id, book_id, quantity, subtotal, order_id, book_price, book_name, book_image
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.OrderdetailExample" >
     select
@@ -84,7 +87,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from orderdetail
     where orderdetail_id = #{orderdetailId,jdbcType=INTEGER}
@@ -100,10 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.bookstore.demo.po.Orderdetail" >
-    insert into orderdetail (orderdetail_id, book_id, quantity, 
-      subtotal, order_id)
-    values (#{orderdetailId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
-      #{subtotal,jdbcType=DOUBLE}, #{orderId,jdbcType=VARCHAR})
+    insert into orderdetail (orderdetail_id, book_id, quantity,
+      subtotal, order_id, book_price,
+      book_name, book_image)
+    values (#{orderdetailId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
+      #{subtotal,jdbcType=DOUBLE}, #{orderId,jdbcType=VARCHAR}, #{bookPrice,jdbcType=DOUBLE},
+      #{bookName,jdbcType=VARCHAR}, #{bookImage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bookstore.demo.po.Orderdetail" >
     insert into orderdetail
@@ -123,6 +128,15 @@
       <if test="orderId != null" >
         order_id,
       </if>
+      <if test="bookPrice != null" >
+        book_price,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="bookImage != null" >
+        book_image,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderdetailId != null" >
@@ -139,6 +153,15 @@
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPrice != null" >
+        #{bookPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookImage != null" >
+        #{bookImage,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +189,15 @@
       <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=VARCHAR},
       </if>
+      <if test="record.bookPrice != null" >
+        book_price = #{record.bookPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bookName != null" >
+        book_name = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookImage != null" >
+        book_image = #{record.bookImage,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -174,10 +206,13 @@
   <update id="updateByExample" parameterType="map" >
     update orderdetail
     set orderdetail_id = #{record.orderdetailId,jdbcType=INTEGER},
-      book_id = #{record.bookId,jdbcType=INTEGER},
-      quantity = #{record.quantity,jdbcType=INTEGER},
-      subtotal = #{record.subtotal,jdbcType=DOUBLE},
-      order_id = #{record.orderId,jdbcType=VARCHAR}
+    book_id = #{record.bookId,jdbcType=INTEGER},
+    quantity = #{record.quantity,jdbcType=INTEGER},
+    subtotal = #{record.subtotal,jdbcType=DOUBLE},
+    order_id = #{record.orderId,jdbcType=VARCHAR},
+    book_price = #{record.bookPrice,jdbcType=DOUBLE},
+    book_name = #{record.bookName,jdbcType=VARCHAR},
+    book_image = #{record.bookImage,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +232,15 @@
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=VARCHAR},
       </if>
+      <if test="bookPrice != null" >
+        book_price = #{bookPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookImage != null" >
+        book_image = #{bookImage,jdbcType=VARCHAR},
+      </if>
     </set>
     where orderdetail_id = #{orderdetailId,jdbcType=INTEGER}
   </update>
@@ -205,7 +249,10 @@
     set book_id = #{bookId,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
       subtotal = #{subtotal,jdbcType=DOUBLE},
-      order_id = #{orderId,jdbcType=VARCHAR}
+      order_id = #{orderId,jdbcType=VARCHAR},
+      book_price = #{bookPrice,jdbcType=DOUBLE},
+      book_name = #{bookName,jdbcType=VARCHAR},
+      book_image = #{bookImage,jdbcType=VARCHAR}
     where orderdetail_id = #{orderdetailId,jdbcType=INTEGER}
   </update>
 </mapper>

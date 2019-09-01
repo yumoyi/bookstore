@@ -16,41 +16,41 @@ public interface CategorysService {
      * @param categorys
      * @param page
      * @param size
-     * @return
+     * @return 带分页的分类信息
      */
     PageInfo<Categorys> findAllByPage(Categorys categorys,int page,int size);
 
     /**
      * 根据id删除分类
      * @param categoryId
-     * @return Integer
+     * @return 判断是否删除成功
      */
     Integer deleteById(Integer categoryId);
 
     /**
      * 添加分类
      * @param categorys
-     * @return Integer
+     * @return 判断是否添加成功
      */
     Integer add(Categorys categorys);
 
     /**
      * 修改分类
      * @param categorys
-     * @return Integer
+     * @return 判断是否修改成功
      */
     Integer update(Categorys categorys);
 
     /**
      * 不带分页的全部分类查询
-     * @return categorys
+     * @return 分类信息
      */
     List<Categorys> findAll();
 
     /**
      * 根据分类信息查询分类是否存在
      * @param categorys
-     * @return categorys
+     * @return 分类信息
      */
     Categorys findByCategorys(Categorys categorys);
 }

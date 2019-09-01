@@ -35,12 +35,17 @@ public class BooksController {
     @Autowired
     private CategorysService categorysService;
 
+    /**
+     * 后台书籍页面展示
+     * @param books
+     * @param model
+     * @param page
+     * @param size
+     * @return bookFlag为1跳转到在架,否则到未在架
+     */
     @RequestMapping("/book")
-    public String book(@RequestParam(value="bookFlag",required=true,defaultValue="1")Integer bookFlag, @RequestParam(value="categoryId",required=false)Integer categoryId, @RequestParam(value="bookName",required=false)String bookName, Model model, @RequestParam(value="page",required=true,defaultValue="1")int page, @RequestParam(value="size",required=true,defaultValue="5")int size) {
-        Books books = new Books();
-        books.setBookName(bookName);
-        books.setCategoryId(categoryId);
-        books.setBookFlag(bookFlag);
+    public String book(Books books, Model model, @RequestParam(defaultValue="1")int page, @RequestParam(defaultValue="5")int size) {
+
         PageInfo<Books> pageInfo = booksService.findAllByPage(books, page, size);
 
         //判断搜索书籍是否存在
@@ -56,6 +61,7 @@ public class BooksController {
 
         List<Categorys> list = categorysService.findAll();
         model.addAttribute("categoryList", list);
+        Integer bookFlag = books.getBookFlag();
         if(bookFlag==1) {
             return "admin/book";
         }
@@ -66,39 +72,35 @@ public class BooksController {
 
     /**
      * 后台书籍下架
-     * @param  bookId
-     * @return
+     * @param  books
+     * @return 重定向到书籍展示页面
      */
     @RequestMapping("/bookDown")
-    public String bookDown(Integer bookId){
-
-        Books books = new Books();
-        books.setBookId(bookId);
+    public String bookDown(Books books){
         books.setBookFlag(2);
         booksService.bookUpdate(books);
-        return "redirect:book";
+        Integer bookFlag = books.getBookFlag();
+        return "redirect:book?bookFlag="+bookFlag.toString();
     }
 
     /**
      * 后台书籍上架
-     * @param bookId
-     * @return
+     * @param books
+     * @return 重定向到书籍展示页面
      */
     @RequestMapping("/bookUp")
-    public String bookUp(Integer bookId){
-
-        Books books = new Books();
-        books.setBookId(bookId);
+    public String bookUp(Books books){
         books.setBookFlag(1);
         booksService.bookUpdate(books);
-        return "redirect:book?bookFlag=2";
+        Integer bookFlag = books.getBookFlag();
+        return "redirect:book?bookFlag="+bookFlag.toString();
     }
 
 
     /**
      * 跳转到添加的页面
      * @param model
-     * @return
+     * @return 书籍添加页面
      */
 
     @RequestMapping("/bookadd")
@@ -113,11 +115,11 @@ public class BooksController {
      * 后台书籍添加
      * @param book
      * @param bookImages
-     * @return
+     * @return 书籍展示页面
      * @throws Exception
      */
     @RequestMapping(value="/bookAdd",method = { RequestMethod.POST})
-    public String bookadds(Books book, MultipartFile bookImages) throws IllegalStateException,Exception {
+    public String bookadds(Books book, MultipartFile bookImages) throws Exception {
         //基本数据类型赋值
         book.setBookFlag(1);
         //上传文件类型
@@ -135,16 +137,16 @@ public class BooksController {
         book.setBookImage(name+exename);
 
         booksService.add(book);
-        return"redirect:book";
+        Integer bookFlag =book.getBookFlag();
+        return "redirect:book?bookFlag="+bookFlag.toString();
     }
 
 
 
 
     /**
-     * 后台书籍
-     * 跳转到详情页面
-     * @return
+     * 跳转到后台书籍详情页面
+     * @return 书籍详情页面
      */
     @RequestMapping("/bookAll")
     public String bookAll(Integer bookId,Model model) {
@@ -159,17 +161,16 @@ public class BooksController {
     }
 
     /**
-     * 后台书籍更新
+     * 后台书籍信息更新
      * @param book
      * @param bookImages
-     * @return
-     * @throws IllegalStateException
-     * @throws IOException
+     * @return 返回提示信息
+     * @throws Exception
      */
      
     @RequestMapping(value="/bookUpdate")
     @ResponseBody
-    public Map<String, Object> bookUpdate(Books book,@RequestParam(value="bookImages",required=false)MultipartFile bookImages) throws IllegalStateException, IOException {
+    public Map<String, Object> bookUpdate(Books book,MultipartFile bookImages) throws Exception {
 
         if(bookImages!=null) {
             //图片的原始名字
