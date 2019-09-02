@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -32,7 +33,20 @@ public class AddressController {
     public String userAddress(Model model,Integer userId){
 
         List<Address> addresses = userService.userAddress(userId);
-        model.addAttribute("addresses",addresses);
+        if(addresses.size()==0){
+            model.addAttribute("msg","该用户暂无收货人!");
+        }else{
+            model.addAttribute("addresses",addresses);
+        }
         return "admin/address";
+    }
+
+
+
+    @RequestMapping("/selectAddress")
+    @ResponseBody
+    public Address selectAddress(Integer addressId){
+        Address address = userService.selectAddress(addressId);
+        return address;
     }
 }

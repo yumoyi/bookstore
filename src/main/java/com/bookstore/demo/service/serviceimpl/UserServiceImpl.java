@@ -130,6 +130,17 @@ public class UserServiceImpl implements UserService {
         return usersMapper.countByExample(usersExample);
     }
 
+    /**
+     * 收货人id查询收货人信息
+     *
+     * @param addressId
+     * @return 收货人信息
+     */
+    @Override
+    public Address selectAddress(Integer addressId) {
+        return addressMapperCustom.selectAddress(addressId);
+    }
+
 
 }
 

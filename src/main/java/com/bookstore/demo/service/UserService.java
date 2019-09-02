@@ -71,4 +71,11 @@ public interface UserService {
      * @return 用户总数
      */
     Integer countUsers(UsersExample usersExample);
+
+    /**
+     * 收货人id查询收货人信息
+     * @param addressId
+     * @return 收货人信息
+     */
+    Address selectAddress(Integer addressId);
 }

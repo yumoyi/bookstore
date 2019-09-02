@@ -18,4 +18,11 @@ public interface AddressMapperCustom {
      * @return 收货人信息
      */
     List<Address> userAddress(Integer userId);
+
+    /**
+     * 查询收货人
+     * @param addressId
+     * @return 收货人信息
+     */
+    Address selectAddress(Integer addressId);
 }
