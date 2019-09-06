@@ -6,8 +6,10 @@
     <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
     <result column="order_total" property="orderTotal" jdbcType="DOUBLE" />
     <result column="order_state" property="orderState" jdbcType="INTEGER" />
-    <result column="address_id" property="addressId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="address_name" property="addressName" jdbcType="VARCHAR" />
+    <result column="address_phone" property="addressPhone" jdbcType="VARCHAR" />
+    <result column="address_address" property="addressAddress" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    order_id, order_time, order_total, order_state, address_id, user_id
+    order_id, order_time, order_total, order_state, user_id, address_name, address_phone, 
+    address_address
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bookstore.demo.po.OrdersExample" >
     select
@@ -85,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from orders
     where order_id = #{orderId,jdbcType=VARCHAR}
@@ -102,11 +105,11 @@
   </delete>
   <insert id="insert" parameterType="com.bookstore.demo.po.Orders" >
     insert into orders (order_id, order_time, order_total, 
-      order_state, address_id, user_id
-      )
+      order_state, user_id, address_name, 
+      address_phone, address_address)
     values (#{orderId,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, #{orderTotal,jdbcType=DOUBLE}, 
-      #{orderState,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
-      )
+      #{orderState,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{addressName,jdbcType=VARCHAR}, 
+      #{addressPhone,jdbcType=VARCHAR}, #{addressAddress,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bookstore.demo.po.Orders" >
     insert into orders
@@ -123,11 +126,17 @@
       <if test="orderState != null" >
         order_state,
       </if>
-      <if test="addressId != null" >
-        address_id,
-      </if>
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="addressName != null" >
+        address_name,
+      </if>
+      <if test="addressPhone != null" >
+        address_phone,
+      </if>
+      <if test="addressAddress != null" >
+        address_address,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -143,11 +152,17 @@
       <if test="orderState != null" >
         #{orderState,jdbcType=INTEGER},
       </if>
-      <if test="addressId != null" >
-        #{addressId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addressName != null" >
+        #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPhone != null" >
+        #{addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressAddress != null" >
+        #{addressAddress,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -172,11 +187,17 @@
       <if test="record.orderState != null" >
         order_state = #{record.orderState,jdbcType=INTEGER},
       </if>
-      <if test="record.addressId != null" >
-        address_id = #{record.addressId,jdbcType=INTEGER},
-      </if>
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressName != null" >
+        address_name = #{record.addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressPhone != null" >
+        address_phone = #{record.addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressAddress != null" >
+        address_address = #{record.addressAddress,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -186,11 +207,13 @@
   <update id="updateByExample" parameterType="map" >
     update orders
     set order_id = #{record.orderId,jdbcType=VARCHAR},
-      order_time = #{record.orderTime,jdbcType=TIMESTAMP},
-      order_total = #{record.orderTotal,jdbcType=DOUBLE},
-      order_state = #{record.orderState,jdbcType=INTEGER},
-      address_id = #{record.addressId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER}
+    order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+    order_total = #{record.orderTotal,jdbcType=DOUBLE},
+    order_state = #{record.orderState,jdbcType=INTEGER},
+    user_id = #{record.userId,jdbcType=INTEGER},
+    address_name = #{record.addressName,jdbcType=VARCHAR},
+    address_phone = #{record.addressPhone,jdbcType=VARCHAR},
+    address_address = #{record.addressAddress,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -207,11 +230,17 @@
       <if test="orderState != null" >
         order_state = #{orderState,jdbcType=INTEGER},
       </if>
-      <if test="addressId != null" >
-        address_id = #{addressId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addressName != null" >
+        address_name = #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPhone != null" >
+        address_phone = #{addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressAddress != null" >
+        address_address = #{addressAddress,jdbcType=VARCHAR},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=VARCHAR}
@@ -221,8 +250,10 @@
     set order_time = #{orderTime,jdbcType=TIMESTAMP},
       order_total = #{orderTotal,jdbcType=DOUBLE},
       order_state = #{orderState,jdbcType=INTEGER},
-      address_id = #{addressId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER}
+      user_id = #{userId,jdbcType=INTEGER},
+      address_name = #{addressName,jdbcType=VARCHAR},
+      address_phone = #{addressPhone,jdbcType=VARCHAR},
+      address_address = #{addressAddress,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -103,6 +103,14 @@
 
                         <c:if test="${empty addresses}">
                             <font color="red">${msg}</font>
+
+                            <!--数据列表/-->
+                            <div class="col-md-12 ">
+                                <div class="box-tools text-center">
+                                    <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
+                                </div>
+                            </div>
+
                         </c:if>
 
 

@@ -124,7 +124,8 @@
      									</select>
                                   </div>
                                   <div class="col-md-4 data">
-                                        <input type="text" class="form-control input-sm" value="${ bookName}" name="bookName" placeholder="书籍名称" onkeydown="if(event.keyCode==32||event.keyCode==13){return false;}">
+                                        <input type="text" class="form-control input-sm" value="${bookName}" name="bookName" placeholder="书籍名称" onkeydown="if(event.keyCode==32||event.keyCode==13){return false;}">
+										<input type="hidden" name="bookFlag" value="1">
                                   </div>
 								<button type="sumbit" class="btn btn-info btn-flat" style="height: 30px">GO</button>
 							</form>

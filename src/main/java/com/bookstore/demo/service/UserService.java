@@ -1,10 +1,7 @@
 package com.bookstore.demo.service;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.bookstore.demo.po.Address;
-import com.bookstore.demo.po.BooksExample;
-import com.bookstore.demo.po.Users;
-import com.bookstore.demo.po.UsersExample;
+import com.bookstore.demo.po.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -74,8 +71,8 @@ public interface UserService {
 
     /**
      * 收货人id查询收货人信息
-     * @param addressId
+     * @param orderId
      * @return 收货人信息
      */
-    Address selectAddress(Integer addressId);
+    Orders selectAddress(String orderId);
 }

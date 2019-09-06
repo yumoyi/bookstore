@@ -35,14 +35,24 @@ public class Orders {
     private Integer orderState;
 
     /**
-     * 订单的收货地址id
-     */
-    private Integer addressId;
-
-    /**
      * 订单的用户id
      */
     private Integer userId;
+
+    /**
+     * 收货人
+     */
+    private String addressName;
+
+    /**
+     * 收货人电话
+     */
+    private String addressPhone;
+
+    /**
+     * 收货地址
+     */
+    private String addressAddress;
 
 
 }

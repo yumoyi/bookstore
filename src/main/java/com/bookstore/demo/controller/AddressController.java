@@ -1,13 +1,12 @@
 package com.bookstore.demo.controller;
 
-import com.bookstore.demo.mapper.UsersMapper;
 import com.bookstore.demo.po.Address;
+import com.bookstore.demo.po.Orders;
 import com.bookstore.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -42,11 +41,15 @@ public class AddressController {
     }
 
 
-
+    /**
+     * 根据订单id查询收货人信息
+     * @param orderId
+     * @return 收货人信息
+     */
     @RequestMapping("/selectAddress")
     @ResponseBody
-    public Address selectAddress(Integer addressId){
-        Address address = userService.selectAddress(addressId);
+    public Orders selectAddress(String orderId){
+        Orders address = userService.selectAddress(orderId);
         return address;
     }
 }

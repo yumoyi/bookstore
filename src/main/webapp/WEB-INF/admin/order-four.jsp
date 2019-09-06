@@ -144,7 +144,7 @@
                                     <td>${p.orderId}</td>
                                     <td>${p.orderTotal}</td>
                                     <td>${p.userName}</td>
-                                    <td>${p.addressName}</td>
+                                    <td><a href="#" data-toggle="modal" data-target="#addressDialog" onclick="selectAddress(${p.orderId})">${p.addressName}</a></td>
                                     <td><c:if test="${p.orderState==4}">已完成</c:if></td>
                                     <td><fmt:formatDate value="${p.orderTime}"/></td>
                                     <td class="text-center">
@@ -165,6 +165,48 @@
 
                 </div>
                 <!-- /.box-body -->
+
+
+                <div class="modal fade" id="addressDialog" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">收货人信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" id="address_form">
+                                    <div class="form-group">
+                                        <label for="address_name" class="col-sm-2 control-label">收货人</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="address_name" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_address" class="col-sm-2 control-label">收货地址</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="address_address" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_phone" class="col-sm-2 control-label">收货人电话</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="address_phone" readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- .box-footer-->
                 <div class="box-footer">
@@ -325,6 +367,19 @@
         // 激活导航位置
         setSidebarActive("admin-index");
     });
+
+    function selectAddress(orderId) {
+        $.ajax({
+            type:"get",
+            url:"${pageContext.request.contextPath}/admin/selectAddress",
+            data:{"orderId":orderId},
+            success:function(data) {
+                $("#address_name").val(data.addressName);
+                $("#address_address").val(data.addressAddress);
+                $("#address_phone").val(data.addressPhone);
+            }
+        });
+    }
 </script>
 </body>
 

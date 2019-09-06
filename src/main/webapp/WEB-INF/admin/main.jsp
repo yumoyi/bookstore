@@ -63,6 +63,13 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 
+
+ 	<c:if test="${empty admin }">
+	<!-- 没有登录-->
+		<h1>没有登录,无权访问</h1>
+	</c:if>
+
+    <c:if test="${not empty admin }">
 	<div class="wrapper">
 
 		<!-- 页面头部 -->
@@ -129,6 +136,16 @@
 
 				</div>
 				<!-- /.row -->
+
+				<c:if test="${empty pageinfo }">
+					<!-- 没有待处理订单 -->
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<i class="fa fa-cube"></i>
+							<h3 class="box-title">此时没有要处理的订单哦</h3>
+						</div>
+					</div>
+				</c:if>
 
 				<c:if test="${not empty pageinfo }">
 				<!-- 待处理订单 -->
@@ -201,6 +218,7 @@
 
 
 	</div>
+	</c:if>
 
 	<script
 		src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>

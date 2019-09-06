@@ -11,4 +11,5 @@
         select * from admin
         where admin_name =#{adminName} and admin_password =#{adminPassword}
     </select>
+
 </mapper>

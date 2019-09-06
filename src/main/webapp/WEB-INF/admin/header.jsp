@@ -35,7 +35,7 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">修改密码</a>
+								<a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#userDialog" onclick="selectPassword(${admin.adminId})">修改密码</a>
 							</div>
 							<div class="pull-right">
 								<a href="${pageContext.request.contextPath}/admin/loginout"
@@ -49,3 +49,79 @@
 	</nav>
 </header>
 <!-- 页面头部 /-->
+
+<div class="modal fade" id="userDialog" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">修改密码</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="user_form">
+					<div class="form-group">
+						<div class="col-sm-10">
+							<input type="hidden" class="form-control" id="admin_id" readonly="readonly" name="adminId">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="admin_name" class="col-sm-2 control-label">用户名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="admin_name" readonly="readonly" name="adminName">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="admin_password" class="col-sm-2 control-label">新密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="admin_password" name="adminPassword">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="address_repassword" class="col-sm-2 control-label">确定密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="address_repassword" >
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" onclick="updatePassword()">保存修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function selectPassword(adminId) {
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/admin/selectPassword",
+			data:{"adminId":adminId},
+			success:function(data) {
+				$("#admin_id").val(data.adminId);
+				$("#admin_name").val(data.adminName);
+			}
+		});
+	}
+	function updatePassword() {
+		$.post("${pageContext.request.contextPath}/admin/updatePassword",$("#user_form").serialize(),function(data){
+			// 	data 返回boolean
+			if(data){
+				alert("密码更新成功！");
+				location.href="${pageContext.request.contextPath }/admin/loginout";
+			}else{
+				alert("密码更新失败！");
+			}
+
+
+		});
+	}
+
+
+</script>

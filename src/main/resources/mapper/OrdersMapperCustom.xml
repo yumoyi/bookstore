@@ -7,8 +7,10 @@
         <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
         <result column="order_total" property="orderTotal" jdbcType="DOUBLE" />
         <result column="order_state" property="orderState" jdbcType="INTEGER" />
-        <result column="address_id" property="addressId" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="address_name" property="addressName" jdbcType="VARCHAR" />
+        <result column="address_phone" property="addressPhone" jdbcType="VARCHAR" />
+        <result column="address_address" property="addressAddress" jdbcType="VARCHAR" />
     </resultMap>
 
 
@@ -17,10 +19,11 @@
         <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
         <result column="order_total" property="orderTotal" jdbcType="DOUBLE" />
         <result column="order_state" property="orderState" jdbcType="INTEGER" />
-        <result column="address_id" property="addressId" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="user_name" property="userName" jdbcType="VARCHAR" />
         <result column="address_name" property="addressName" jdbcType="VARCHAR" />
+        <result column="address_phone" property="addressPhone" jdbcType="VARCHAR" />
+        <result column="address_address" property="addressAddress" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="findAllByOrders2" resultMap="BasePageResultMap" parameterType="com.bookstore.demo.po.Orders">
@@ -29,22 +32,19 @@
         order_time,
         order_total,
         order_state,
-        b1.address_id address_id,
-        b2.user_id user_id,
-        b1.address_name,
-        b2.user_name
+        address_name,
+        address_phone,
+        address_address,
+        b.user_id user_id,
+        b.user_name
 
-        FROM orders c LEFT JOIN address b1 on c.address_id = b1.address_id
-        LEFT JOIN users b2 on c.user_id = b2.user_id
+        FROM orders c LEFT JOIN users b on c.user_id = b.user_id
         <where>
             <if test="orderId !=null">
                 and order_id like concat('%',#{orderId},'%')
             </if>
             <if test="orderState !=null">
                 and order_state=#{orderState}
-            </if>
-            <if test="addressId !=null">
-                and address_id=#{addressId}
             </if>
             <if test="userId !=null">
                 and c.user_id=#{userId}
@@ -60,13 +60,13 @@
         order_time,
         order_total,
         order_state,
-        b1.address_id address_id,
-        b2.user_id user_id,
-        b1.address_name,
-        b2.user_name
+        address_name,
+        address_phone,
+        address_address,
+        b.user_id user_id,
+        b.user_name
 
-        FROM orders c LEFT JOIN address b1 on c.address_id = b1.address_id
-        LEFT JOIN users b2 on c.user_id = b2.user_id
+        FROM orders c LEFT JOIN users b on c.user_id = b.user_id
         <where>
             <if test="orderId !=null">
                 and order_id like concat('%',#{orderId},'%')
@@ -74,13 +74,14 @@
             <if test="orderState !=null">
                 and order_state=#{orderState,jdbcType=INTEGER}
             </if>
-            <if test="addressId !=null">
-                and address_id=#{addressId,jdbcType=INTEGER}
-            </if>
             <if test="userId !=null">
                 and user_id=#{userId,jdbcType=INTEGER}
             </if>
         </where>
         order by order_time asc
+    </select>
+    <select id="selectAddress" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select * from orders
+        where order_id = #{orderId,jdbcType=VARCHAR}
     </select>
 </mapper>

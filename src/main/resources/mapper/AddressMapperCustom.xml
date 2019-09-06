@@ -13,9 +13,4 @@
         from address
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
-    <select id="selectAddress" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select *
-        from address
-        where address_id = #{addressId,jdbcType=INTEGER}
-    </select>
 </mapper>

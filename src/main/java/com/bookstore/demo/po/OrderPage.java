@@ -11,11 +11,6 @@ import java.util.Date;
 public class OrderPage extends Orders{
 
     /**
-     * 订单收货人
-     */
-    private String addressName;
-
-    /**
      * 订单的用户名称
      */
     private String userName;

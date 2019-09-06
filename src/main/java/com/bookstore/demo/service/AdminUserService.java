@@ -17,4 +17,5 @@ public interface AdminUserService {
      * @return 带分页的用户信息
      */
     PageInfo<Users> findAllByPage(Users users, int page, int size);
+
 }

@@ -4,10 +4,12 @@ import com.bookstore.demo.po.*;
 import com.bookstore.demo.service.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -118,6 +120,30 @@ public class AdminUserController {
             model.addAttribute("pageinfo", pageInfo);
         }
         return "admin/main";
+    }
+
+
+    @RequestMapping("/updatePassword")
+    @ResponseBody //作用 把对象转成json字符串，并且回写浏览器
+    public boolean updatePassword(Admin admin){
+        try {
+            adminService.update(admin);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Session域中获取管理员信息
+     * @param session
+     * @return 管理员信息
+     */
+    @RequestMapping("/selectPassword")
+    @ResponseBody //作用 把对象转成json字符串，并且回写浏览器
+    public Admin selectPassword(HttpSession session){
+        Admin admin = (Admin) session.getAttribute("admin");
+        return admin;
     }
 
 }

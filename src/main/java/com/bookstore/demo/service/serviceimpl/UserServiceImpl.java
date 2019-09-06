@@ -1,14 +1,8 @@
 package com.bookstore.demo.service.serviceimpl;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.bookstore.demo.mapper.AddressMapper;
-import com.bookstore.demo.mapper.AddressMapperCustom;
-import com.bookstore.demo.mapper.UsersMapper;
-import com.bookstore.demo.mapper.UsersMapperCustom;
-import com.bookstore.demo.po.Address;
-import com.bookstore.demo.po.BooksExample;
-import com.bookstore.demo.po.Users;
-import com.bookstore.demo.po.UsersExample;
+import com.bookstore.demo.mapper.*;
+import com.bookstore.demo.po.*;
 import com.bookstore.demo.service.UserService;
 import com.bookstore.demo.utils.SendUtils;
 import lombok.ToString;
@@ -34,6 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AddressMapperCustom addressMapperCustom;
+    @Autowired
+    private OrdersMapperCustom ordersMapperCustom;
 
 
     /**
@@ -133,12 +129,12 @@ public class UserServiceImpl implements UserService {
     /**
      * 收货人id查询收货人信息
      *
-     * @param addressId
+     * @param orderId
      * @return 收货人信息
      */
     @Override
-    public Address selectAddress(Integer addressId) {
-        return addressMapperCustom.selectAddress(addressId);
+    public Orders selectAddress(String orderId) {
+        return ordersMapperCustom.selectAddress(orderId);
     }
 
 

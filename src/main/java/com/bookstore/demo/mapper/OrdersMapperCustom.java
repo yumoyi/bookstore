@@ -1,5 +1,6 @@
 package com.bookstore.demo.mapper;
 
+import com.bookstore.demo.po.Address;
 import com.bookstore.demo.po.OrderPage;
 import com.bookstore.demo.po.Orders;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,11 @@ public interface OrdersMapperCustom {
      * @return 订单信息
      */
     List<OrderPage> findAllByOrders2(Orders orders);
+
+    /**
+     * 查询收货人
+     * @param orderId
+     * @return 收货人信息
+     */
+    Orders selectAddress(String orderId);
 }

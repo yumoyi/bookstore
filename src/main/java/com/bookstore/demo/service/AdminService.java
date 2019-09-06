@@ -13,4 +13,10 @@ public interface AdminService {
      * @return 管理员信息
      */
     Admin login(Admin admin);
+
+    /**
+     * 管理员修改密码
+     * @param admin
+     */
+     void update(Admin admin);
 }

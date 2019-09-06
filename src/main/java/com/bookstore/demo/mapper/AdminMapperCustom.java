@@ -16,4 +16,5 @@ public interface AdminMapperCustom {
      * @return 管理员信息
      */
     Admin login(Admin admin);
+
 }
